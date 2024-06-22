@@ -1,22 +1,44 @@
 // const bcrypt = require('bcryptjs');
 // const jwt = require('jsonwebtoken');
-const User = require('./userModel');
+
+const mongoose = require('mongoose');
+
 
 exports.register = async (req, res) => {
 
-  const { email, password } = req;
+  // const { email, password } = req;
 
   try {
     // const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({ email, password: password });
-    await user.save();
+    mongoose.connect('mongodb://127.0.0.1:27017/deveazy-assignment');
+
+// User model
+const User = mongoose.model('user1',{
+    name: { type: String },
+    age: { type: Number }
+});
+
+var new_user = new User({
+    name: 'Manish',
+    age:34
+})
+
+new_user.save()
+console.log("Success")
+    // mongoose.connect('mongodb://127.0.0.1:27017/deveazy-assignment');
+    // const User = mongoose.model('user1',{
+    //   email: { type: String },
+    //   password: { type: String }
+    // });
+    
+    // var user = new User({ email: email, password: password });
+    // user.save();
 
     return 'User registered successfully';
   } catch (error) {
     return error.message;
   }
 };
-
 // exports.login = async (req, res) => {
 //   const { email, password } = req.body;
 

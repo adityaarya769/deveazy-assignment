@@ -10,7 +10,8 @@ function RegisterPage() {
   const handleRegister = async () => {
     try {
       console.log("Function initiated");
-      await register({email, password});
+      const response = await register({email, password});
+      console.log(response);
       setSuccess('Registration successful!');
       setError('');
     } catch (error) {
