@@ -28,6 +28,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "backend-start": "node app.js",
+    "backend-dev": "nodemon app.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
