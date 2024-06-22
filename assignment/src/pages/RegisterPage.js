@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+const { register } = require("../helper/authController");
 
 function RegisterPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   const handleRegister = async () => {
     try {
-      await axios.post('/api/auth/register', { email, password });
-      navigate('/login');
+      console.log("Function initiated");
+      await register({email, password});
+      setSuccess('Registration successful!');
+      setError('');
     } catch (error) {
-      alert('Registration failed');
+      console.error('Registration failed:', error);
+      setError('Registration failed. Please try again.');
+      setSuccess('');
     }
   };
 
@@ -32,6 +36,8 @@ function RegisterPage() {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button onClick={handleRegister}>Register</button>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {success && <p style={{ color: 'green' }}>{success}</p>}
     </div>
   );
 }
