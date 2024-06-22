@@ -2,10 +2,10 @@ const { Storage } = require('@google-cloud/storage');
 const path = require('path');
 
 const storage = new Storage({
-  keyFilename: path.join(__dirname, '../../google-cloud-key.json'),
-  projectId: process.env.GCLOUD_PROJECT_ID,
+  keyFilename: path.join(__dirname, '../google-cloud-key.json'),
+  projectId: "scrapi-development",
 });
 
-const bucket = storage.bucket(process.env.GCLOUD_BUCKET_NAME);
+const bucket = storage.bucket("deveazy-assignment");
 
 module.exports = bucket;
